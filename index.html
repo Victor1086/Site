@@ -49,4 +49,56 @@
             overflow: auto;
         }
         canvas {
-            margin: 10p
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Visualizar Portfólio</h1>
+    </header>
+
+    <main>
+        <div id="pdf-container"></div>
+    </main>
+
+    <footer>
+        <p>2024 © Victor</p>
+    </footer>
+
+    <script>
+        const url = 'portifolio.pdf'; // Caminho para o seu arquivo PDF
+
+        // Função para renderizar todas as páginas do PDF
+        const renderPDF = (url) => {
+            const container = document.getElementById('pdf-container');
+            const loadingTask = pdfjsLib.getDocument(url);
+            
+            loadingTask.promise.then(pdf => {
+                // Renderiza todas as páginas
+                for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                    pdf.getPage(pageNum).then(page => {
+                        const scale = 1.5;
+                        const viewport = page.getViewport({ scale: scale });
+
+                        // Prepare o canvas para renderizar o PDF
+                        const canvas = document.createElement('canvas');
+                        container.appendChild(canvas);
+                        const context = canvas.getContext('2d');
+                        canvas.height = viewport.height;
+                        canvas.width = viewport.width;
+
+                        // Renderize a página do PDF no canvas
+                        page.render({
+                            canvasContext: context,
+                            viewport: viewport
+                        });
+                    });
+                }
+            });
+        };
+
+        renderPDF(url);
+    </script>
+</body>
+</html>
