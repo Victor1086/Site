@@ -13,9 +13,10 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
         header {
             background-color: #D32F2F; /* Vermelho */
@@ -25,19 +26,19 @@
             width: 100%;
         }
         main {
+            flex-grow: 1; /* Permite que o conteúdo principal ocupe o espaço disponível */
             padding: 20px;
             width: 100%;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
+            overflow: auto;
         }
         footer {
             background-color: #D32F2F; /* Vermelho */
             color: white;
             text-align: center;
             padding: 10px;
-            position: fixed;
-            bottom: 0;
             width: 100%;
         }
         #pdf-container {
@@ -47,6 +48,7 @@
             align-items: center;
             width: 90%;
             overflow: auto;
+            margin-top: 20px;
         }
         canvas {
             margin: 10px;
