@@ -1,34 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio</title>
+    <title>Visualizar PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
             margin: 0;
             padding: 0;
-            text-align: center;
         }
         header {
-            background-color: #007BFF;
+            background-color: #4CAF50;
             color: white;
-            padding: 20px 0;
+            text-align: center;
+            padding: 10px;
         }
-        iframe {
-            border: none;
+        main {
+            padding: 20px;
+        }
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
             width: 100%;
-            height: 90vh;
+        }
+        #pdf-container {
+            width: 100%;
+            height: 500px;
+            overflow: auto;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Visualizador de PDF</h1>
+        <h1>Visualizar PDF</h1>
     </header>
-    <!-- Caminho correto para o arquivo PDF -->
-    <iframe src="portifolio.pdf" width="600" height="400"></iframe>
 
+    <main>
+        <h2>Portfólio</h2>
+        <div id="pdf-container"></div>
+    </main>
+
+    <footer>
+        <p>2024 © Victor</p>
+    </footer>
+
+    <script>
+        const url = 'portifolio.pdf'; // Caminho para o seu arquivo PDF
+
+        // Função para renderizar o PDF
+        const renderPDF = (url) => {
+            const container = document.getElementById('pdf-container');
+            const loadingTask = pdfjsLib.getDocument(url);
+            loadingTask.promise.then(pdf => {
+                pdf.getPage(1).then(page => {
+                    const scale = 1.5;
+                    const viewport = page.getViewport({ scale: scale });
+
+                    // Prepare o canvas para renderizar o PDF
+                    const canvas = document.createElement('canvas');
+                    container.appendChild(canvas);
+                    const context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+
+                    // Renderize a página do PDF no canvas
+                    page.render({
+                        canvasContext: context,
+                        viewport: viewport
+                    });
+                });
+            });
+        };
+
+        renderPDF(url);
+    </script>
 </body>
 </html>
