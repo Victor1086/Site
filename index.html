@@ -1,49 +1,33 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Site Simples</title>
+    <title>Portfólio</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
             margin: 0;
             padding: 0;
+            text-align: center;
         }
         header {
-            background-color: #4CAF50;
+            background-color: #007BFF;
             color: white;
-            text-align: center;
-            padding: 10px;
+            padding: 20px 0;
         }
-        main {
-            padding: 20px;
-        }
-        footer {
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
+        iframe {
+            border: none;
             width: 100%;
+            height: 90vh;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Bem-vindo ao Meu Site</h1>
+        <h1>Visualizador de PDF</h1>
     </header>
-
-    <main>
-        <h2>Sobre mim</h2>
-        <p>Olá, este é um site simples criado para testar no GitHub Pages!</p>
-        <p>Espero que você goste do layout e da funcionalidade.</p>
-    </main>
-
-    <footer>
-        <p>2024 © Victor</p>
-    </footer>
+    <!-- Caminho correto para o arquivo PDF -->
+    <iframe src="portfolio.pdf"></iframe>
 </body>
 </html>
